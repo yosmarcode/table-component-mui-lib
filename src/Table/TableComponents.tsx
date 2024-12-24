@@ -1,14 +1,14 @@
 import { Box, Checkbox, FormControlLabel, Paper, Radio, RadioGroup, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
-import React from 'react'
+import React, { FC } from 'react'
 import { ITableComponent } from './models'
-import { EnhancedTableHead, getComparator, Order } from '../../utils/tables'
+import { EnhancedTableHead, getComparator, Order } from '../utils/tables'
 import TableExcelComponents from '../TableExcel/TableExcelComponents'
 import TablePaginationsComponents from './components/TablePaginations/TablePaginationsComponents'
 import SearchTable from './components/SearchTable/SearchTable'
 import BtnExcel from '../BtnExcel/BtnExcel'
 
 
-export const TableComponents: React.FC<ITableComponent>  = ({
+export const TableComponents: FC<ITableComponent>  = ({
     dataSource,
     dataSourceExcel,
     columns,
