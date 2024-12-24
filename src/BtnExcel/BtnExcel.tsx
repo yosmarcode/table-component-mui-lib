@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlineCloudDownload } from 'react-icons/ai'
-import { exportTableToExcel2 } from '../../utils/DownLoaderExcel/DownLoaderExcel'
+import { exportTableToExcel2 } from '../utils/DownLoaderExcel/DownLoaderExcel'
 import { Button } from '@mui/material'
 
 

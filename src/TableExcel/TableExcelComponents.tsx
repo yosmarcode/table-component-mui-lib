@@ -1,7 +1,7 @@
 
 import  { memo } from 'react'
 import { HeadCell } from '../Table/models'
-import { getRandomInt } from '../../utils'
+import { getRandomInt } from '../utils'
 const TableExcelComponents = memo(function TableExcelComponents ({ column, dataSource, idTable, isVisible } : {column?: HeadCell[] | any, dataSource?: any[], idTable?: string, isVisible?: boolean}) {
   const columns = column ? column : (dataSource && dataSource.length > 0) ? Object.keys(dataSource[0]) : []
   return (
