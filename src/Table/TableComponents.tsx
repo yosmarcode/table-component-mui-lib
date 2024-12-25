@@ -28,8 +28,8 @@ export const TableComponents: FC<ITableComponent>  = ({
     const [rowsPerPage, setRowsPerPage] = React.useState(5)
     const [searchText, setSearchText] = React.useState<string>('') /// state para buscar en el input text
     /** --------------------------------------------------------------- */
-    const columnDataSource =  Object.keys(dataSource[0]) ?? []
-
+    const columnDataSource = dataSource.length > 0 ? (Object.keys(dataSource[0]) ?? []) : []
+    
     const handleRequestSort = (
       property: keyof any
     ) => {
