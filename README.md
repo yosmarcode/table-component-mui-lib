@@ -1,24 +1,27 @@
 # Table Mui Component Librería
 
-Tabla Componente basada de Material UI.
+Tabla Componente basada de Material UI. 
 
-- Autor: Yosmar Hinestroza
-- Pafina oficial: [yosmarhinestroza.dev](https://yosmarhinestroza.dev)
+Esta tabla solo ha sido probada usando. React
+
+
+* Autor: Yosmar Hinestroza
+* Pagina oficial: [yosmarhinestroza.dev](https://yosmarhinestroza.dev)
+* Correo:  `yosmarcode@gmail.com`
 
 Documentación de Material Table
 
-- [Material UI](https://mui.com/material-ui/react-table/)
+* [Material UI](https://mui.com/material-ui/react-table/)
 
 ## Documentación
 
-```js
+```typescript
 npm i table-component-mui-lib
 ```
 
 Implementación en tu proyecto
 
 Tipo de Datos Columnas
-
 
 ```js
 export interface HeadCell {
@@ -32,7 +35,8 @@ export interface HeadCell {
 ```
 
 Creación de Columna personalizadas
-```js
+
+```javascript
 const column: HeadCell[] = [
   {
     id: 'id',
@@ -65,7 +69,6 @@ const column: HeadCell[] = [
 
 ]
 ```
-
 
 ```js
 import { TableComponents, HeadCell } from 'table-component-mui-lib'
@@ -109,22 +112,23 @@ import { TableComponents, HeadCell } from 'table-component-mui-lib'
               </Box>
             )}
           />
-
 ```
 
 Tabla Referencia
 
-| Tipo            | Descripcion                                                                    |
-|-----------------|--------------------------------------------------------------------------------|
-| dataSource      | Datos visibles en la tabla                                                     |
-| dataSourceExcel | Datos Visible para generar Archivo Excel                                       |
-| columns         | Columna visible en la tabla                                                    |
-| isCheckbox      | Se habilita CheckBox para multiple selección en columnas                       |
-| isRadioBox      | Se habilita RadioBox para solo seleccionar un elemento de la columna           |
-| selectedData    | Hooks Data Seleccionada (esto permite usar la data en el componente principal) |
-| setSelectedData | Hooks Data para seleccionar data                                               |
-| isPaginate      | true - false para generar una paginación de la tabla                           |
-| search          | Se habilita un textBox para buscar dentro de la tabla                          |
-| isDowmload      | Permite habilitar button para descargar archivo excel                          |
-| _styleColumn    | Estilo personalizable a las columnas de la tabla                               |
-| childreButton   | Botones personalizable en la tabla                                             |
+| Tipo | Descripcion |
+|----|----|
+| dataSource | Datos visibles en la tabla |
+| dataSourceExcel | Datos Visible para generar Archivo Excel |
+| columns | Columna visible en la tabla |
+| isCheckbox | Se habilita CheckBox para multiple selección en columnas |
+| isRadioBox | Se habilita RadioBox para solo seleccionar un elemento de la columna |
+| selectedData | Hooks Data Seleccionada (esto permite usar la data en el componente principal) |
+| setSelectedData | Hooks Data para seleccionar data |
+| isPaginate | true - false para generar una paginación de la tabla |
+| search | Se habilita un textBox para buscar dentro de la tabla |
+| isDowmload | Permite habilitar button para descargar archivo excel |
+| _styleColumn | Estilo personalizable a las columnas de la tabla |
+| childreButton | Botones personalizable en la tabla |
+
+

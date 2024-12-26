@@ -30,3 +30,13 @@ export interface ITableComponent  {
     setSearchText?: React.ReactEventHandler | any,
     placeholder?: string
 }
+
+export interface IPaginations {
+  dataSource?: any,
+  rowsPerPage?:  any,
+  setRowsPerPage?: (value: number) => void,
+  page?: any,
+  setPage?: (value: number) => void,
+  handleChangePage?: any,
+  handleChangeRowsPerPage?: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
