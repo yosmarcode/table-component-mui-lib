@@ -94,12 +94,36 @@ export const TableComponents: FC<ITableComponent>  = ({
       [dataSource, order, orderBy, page, rowsPerPage]
     )
 
+
+    const handleSearch = () => {
+      if (searchText.length > 2) {
+        const dataResult = dataSource.filter((row: Record<string, any>) =>
+          Object.values(row).some(value => value?.toString().toUpperCase().includes(searchText?.toUpperCase())))
+  
+        if (dataResult.length > 0) {
+          visibleRows.length = 0 // limpia los datos antiguos
+          visibleRows.push(...dataResult)
+        } else {
+          visibleRows.push(...dataSource
+            .sort(getComparator(order, orderBy))
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)) // limpia los datos antiguos}
+        }
+      } else {
+        visibleRows.push(...dataSource
+          .sort(getComparator(order, orderBy))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
+      }
+      return visibleRows
+    }
+    
+
+
   return (
  <div>
       <Paper sx={{ width: '100%', pt: 0.5, borderRadius: '15px' }}>
         <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
           <div>
-            {search && (<SearchTable setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
+            {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
           </div>
           <div>
             {isDowmload && (<BtnExcel tableId='_excel-download' fileName='archivo-descargar' />)}

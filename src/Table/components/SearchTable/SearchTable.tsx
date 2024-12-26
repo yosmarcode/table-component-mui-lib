@@ -4,7 +4,7 @@ import { Box, InputAdornment, TextField } from '@mui/material'
 import React from 'react'
 import { ITextSearch } from '../../models'
 
-const SearchTable = ({ setSearchText, placeholder }: ITextSearch) => {
+const SearchTable = ({ handleSearch, setSearchText, placeholder }: ITextSearch) => {
   return (
     <div>
       <Box>
@@ -13,7 +13,8 @@ const SearchTable = ({ setSearchText, placeholder }: ITextSearch) => {
           variant='outlined'
           size='small'
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value)}
-          onBlur={(e: any) => setSearchText(e.target.value)}
+          onKeyUp={(e: any) => e.target.value.length > 0 && handleSearch(e.target.value)}
+          onBlur={(e: any) => handleSearch(e.target.value)}
           sx={{ width: '250px' }}
           slotProps={{
             input: {

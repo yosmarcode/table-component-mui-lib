@@ -26,6 +26,7 @@ export interface ITableComponent  {
   }
 
   export interface ITextSearch {
+    handleSearch?: React.ReactEventHandler | any,
     searchText?: string,
     setSearchText?: React.ReactEventHandler | any,
     placeholder?: string
