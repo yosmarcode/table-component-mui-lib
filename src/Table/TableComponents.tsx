@@ -3,9 +3,10 @@ import React, { FC } from 'react'
 import { ITableComponent } from './models'
 import { EnhancedTableHead, getComparator, Order } from '../utils/tables'
 import TableExcelComponents from '../TableExcel/TableExcelComponents'
-import TablePaginationsComponents from './components/TablePaginations/TablePaginationsComponents'
+/*import TablePaginationsComponents from './components/TablePaginations/TablePaginationsComponents'*/
 import SearchTable from './components/SearchTable/SearchTable'
 import BtnExcel from '../BtnExcel/BtnExcel'
+import TablePaginations from './components/TablePaginations/TablePaginations'
 
 
 export const TableComponents: FC<ITableComponent>  = ({
@@ -197,7 +198,15 @@ export const TableComponents: FC<ITableComponent>  = ({
         </TableContainer>
         {isPaginate
           ? (
-            <TablePaginationsComponents
+            <TablePaginations 
+            dataSource={dataSource}
+            rowsPerPage={rowsPerPage}
+            setPage={setPage}
+            page={page}
+            setRowsPerPage={setRowsPerPage}
+            handleChangePage={handleChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage} />
+            /*<TablePaginationsComponents
               dataSource={dataSource}
               rowsPerPage={rowsPerPage}
               setPage={setPage}
@@ -205,7 +214,7 @@ export const TableComponents: FC<ITableComponent>  = ({
               setRowsPerPage={setRowsPerPage}
               handleChangePage={handleChangePage}
               handleChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+            />*/
             )
           : (<Box sx={{ minHeight: '50px', backgroundColor: '#fff', width: '100%', borderRadius: '25px' }} />)}
 
