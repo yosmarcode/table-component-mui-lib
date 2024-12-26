@@ -3,7 +3,7 @@ import { visuallyHidden } from '@mui/utils'
 import React from 'react'
 
 
-export function descendingComparator<T> (a: T, b: T, orderBy: keyof T) {
+function descendingComparator<T> (a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1
   }
@@ -38,7 +38,7 @@ export interface EnhancedTableProps {
   }
 /// COMPONENT: React.Component Component HEADER
 export function EnhancedTableHead (props: EnhancedTableProps) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, column, isCheckbox, _styleColumn, childreButton } = props
+  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, column, isCheckbox, isRadioBox, _styleColumn, childreButton } = props
 
   const createSortHandler =
       (property: keyof any, sort: boolean | undefined) => () => {
@@ -49,7 +49,7 @@ export function EnhancedTableHead (props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        {(isCheckbox || childreButton) && (
+        {(isCheckbox || childreButton || isRadioBox) && (
           <TableCell padding='checkbox' sx={{ ..._styleColumn }}>
             {isCheckbox &&
               <Checkbox

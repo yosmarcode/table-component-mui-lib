@@ -2,10 +2,12 @@
 
 Tabla Componente basada de Material UI.
 
+- Autor: Yosmar Hinestroza
+- Pafina oficial: [yosmarhinestroza.dev](https://yosmarhinestroza.dev)
+
 Documentación de Material Table
 
 - [Material UI](https://mui.com/material-ui/react-table/)
-
 
 ## Documentación
 
@@ -110,7 +112,7 @@ import { TableComponents, HeadCell } from 'table-component-mui-lib'
 
 ```
 
-Tabla
+Tabla Referencia
 
 | Tipo            | Descripcion                                                                    |
 |-----------------|--------------------------------------------------------------------------------|
