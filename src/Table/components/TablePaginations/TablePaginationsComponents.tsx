@@ -5,7 +5,7 @@ import {
   tablePaginationClasses as classes
 } from '@mui/base/TablePagination'
 //import { Config, LIST_ROWS_PER_PAGE } from '@/core/config/Config'
-export const LIST_ROWS_PER_PAGE: number[] = [5, 10, 20, 50, 100, 200]
+const LIST_ROWS_PER_PAGE: number[] = [5, 10, 20, 50, 100, 200]
 const CustomTablePagination = styled(TablePagination)`
 
   & .${classes.toolbar} {
@@ -73,15 +73,14 @@ const CustomTablePagination = styled(TablePagination)`
     }
   }
   `
-
-interface IProps {
+  interface IProps {
     dataSource?: any,
-    rowsPerPage?: React.ReactNode | any,
-    setRowsPerPage?: React.ReactEventHandler | any,
-    page?: React.ReactNode | any,
-    setPage?: React.ReactEventHandler | any,
-    handleChangePage?: React.ReactEventHandler | any
-    handleChangeRowsPerPage?: React.ReactEventHandler | any
+    rowsPerPage?:  any,
+    setRowsPerPage?: (value: number) => void,
+    page?: any,
+    setPage?: (value: number) => void,
+    handleChangePage?: any,
+    handleChangeRowsPerPage?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const TablePaginationsComponents = ({ dataSource, rowsPerPage, page, handleChangePage, handleChangeRowsPerPage }: IProps) => {

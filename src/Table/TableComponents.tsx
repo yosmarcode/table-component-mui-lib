@@ -29,7 +29,7 @@ export const TableComponents: FC<ITableComponent>  = ({
     const [searchText, setSearchText] = React.useState<string>('') /// state para buscar en el input text
     /** --------------------------------------------------------------- */
     const columnDataSource = dataSource.length > 0 ? (Object.keys(dataSource[0]) ?? []) : []
-    
+
     const handleRequestSort = (
       property: keyof any
     ) => {
@@ -90,12 +90,12 @@ export const TableComponents: FC<ITableComponent>  = ({
         [...dataSource]
           .sort(getComparator(order, orderBy))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-      [order, orderBy, page, rowsPerPage]
+      [dataSource, order, orderBy, page, rowsPerPage]
     )
 
   return (
  <div>
-      <Paper sx={{ width: '100%', pt: 0.5, borderRadius: '25px' }}>
+      <Paper sx={{ width: '100%', pt: 0.5, borderRadius: '15px' }}>
         <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
           <div>
             {search && (<SearchTable setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
@@ -136,7 +136,7 @@ export const TableComponents: FC<ITableComponent>  = ({
               {visibleRows?.filter((row: Record<string, any>) =>
                 Object.values(row).some(value => value?.toString().toUpperCase().includes(searchText?.toUpperCase()))
               ).map((row, index: number) => {
-                const isItemSelected = selected.includes(row)
+                const isItemSelected: boolean = selected.includes(row)
                 const labelId = `enhanced-table-checkbox-${index}`
 
                 return (
