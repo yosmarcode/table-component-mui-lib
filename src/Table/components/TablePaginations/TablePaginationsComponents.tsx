@@ -8,7 +8,6 @@ import { IPaginations } from '../../models'
 //import { Config, LIST_ROWS_PER_PAGE } from '@/core/config/Config'
 const LIST_ROWS_PER_PAGE: number[] = [5, 10, 20, 50, 100, 200]
 const CustomTablePagination = styled(TablePagination)`
-
   & .${classes.toolbar} {
     display: flex;
     flex-direction: column;

@@ -18,7 +18,7 @@ export interface ITableComponent  {
     search?: boolean | undefined
     childreButton?: React.ReactNode | any, // Muestra Component boton
     selectedData?: any, // data selected de salida al component de import
-    setSelectedData?: React.ReactNode | any,
+    setSelectedData?: any,
     initialSelectionNumber?: number | undefined, // numero inicial de la lista de columna
     _styleColumn?: React.CSSProperties // se le asigna style a la columna
     titlePlaceholder?: string | undefined // title del input de busquedad personalizado

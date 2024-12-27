@@ -17,6 +17,7 @@ export const TableComponents: FC<ITableComponent>  = ({
     isRadioBox,
     search,
     isDowmload,
+    selectedData,
     setSelectedData,
     isPaginate,
     _styleColumn,
@@ -50,7 +51,7 @@ export const TableComponents: FC<ITableComponent>  = ({
       setSelectedData([]) // set selected para llevar al compoente invocado
     }
   
-    const handleClickCheckBox = ( row: any) => {
+    const handleClickCheckBox = (row: any) => {
       const selectedIndex = selected.indexOf(row)
       let newSelected: any = []
   
@@ -66,26 +67,24 @@ export const TableComponents: FC<ITableComponent>  = ({
           selected.slice(selectedIndex + 1)
         )
       }
-  
       setSelected(newSelected)
       setSelectedData(newSelected)
     }
-    const handleClickRadio = ( row: any) => {
+    const handleClickRadio = (row: any) => {
       if (row) {
         setSelected([row])
         setSelectedData([row])
       }
     }
-  
+
     const handleChangePage = (newPage: number) => {
       setPage(newPage)
     }
-  
+
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
       setRowsPerPage(parseInt(event.target.value, 10))
       setPage(0)
     }
-  
     const visibleRows = React.useMemo(
       () =>
         [...dataSource]
@@ -99,7 +98,7 @@ export const TableComponents: FC<ITableComponent>  = ({
       if (searchText.length > 2) {
         const dataResult = dataSource.filter((row: Record<string, any>) =>
           Object.values(row).some(value => value?.toString().toUpperCase().includes(searchText?.toUpperCase())))
-  
+
         if (dataResult.length > 0) {
           visibleRows.length = 0 // limpia los datos antiguos
           visibleRows.push(...dataResult)
@@ -158,19 +157,17 @@ export const TableComponents: FC<ITableComponent>  = ({
               childreButton={childreButton}
             />
             <TableBody>
-              {visibleRows?.filter((row: Record<string, any>) =>
-                Object.values(row).some(value => value?.toString().toUpperCase().includes(searchText?.toUpperCase()))
-              ).map((row, index: number) => {
+              {visibleRows.map((row, index: number) => {
                 const isItemSelected: boolean = selected.includes(row)
                 const labelId = `enhanced-table-checkbox-${index}`
-
+                console.log('isItemSelected', isItemSelected)
                 return (
                   <TableRow
                     hover
                     role='checkbox'
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={index + 1}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
@@ -197,8 +194,8 @@ export const TableComponents: FC<ITableComponent>  = ({
                                 value={row}
                                 control={<Radio
                                   color='success'
-                                  checked={isItemSelected}
-                                  onClick={() => handleClickRadio( row)}
+                                  checked={JSON.stringify(selectedData) === JSON.stringify(row)}
+                                  onClick={() => handleClickRadio(row)}
                                          />}
                                 label=''
                               />
@@ -222,12 +219,11 @@ export const TableComponents: FC<ITableComponent>  = ({
         </TableContainer>
         {isPaginate
           ? (
-            <TablePaginations 
+            <TablePaginations
             dataSource={dataSource}
             rowsPerPage={rowsPerPage}
             setPage={setPage}
             page={page}
-            setRowsPerPage={setRowsPerPage}
             handleChangePage={handleChangePage}
             handleChangeRowsPerPage={handleChangeRowsPerPage} />
             /*<TablePaginationsComponents
