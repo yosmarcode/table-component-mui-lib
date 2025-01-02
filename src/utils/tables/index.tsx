@@ -27,7 +27,7 @@ export function getComparator<Key extends keyof any> (
 
 export interface EnhancedTableProps {
     numSelected: number;
-    onRequestSort: ( property: keyof any) => void;
+    onRequestSort: ( event: React.MouseEvent<unknown>, property: keyof any) => void;
     onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
     order: Order;
     orderBy: any;
@@ -43,10 +43,11 @@ export function EnhancedTableHead (props: EnhancedTableProps) {
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, column, isCheckbox, isRadioBox, _styleColumn, childreButton } = props
 
   const createSortHandler =
-      (property: keyof any, sort: boolean | undefined) => () => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        sort && onRequestSort(property)
-      }
+  (property: keyof any, sort: boolean | undefined) => (event: React.MouseEvent<unknown>) => {
+    if (sort) {
+      onRequestSort(event, property);
+    }
+  }
 
   return (
     <TableHead>
@@ -67,9 +68,9 @@ export function EnhancedTableHead (props: EnhancedTableProps) {
 
           </TableCell>
         )}
-        {column.map((c: any) => (
+        {column.map((c: any, i: number) => (
           <TableCell
-            key={c.id}
+            key={c.id + i}
             align={c.numeric ? 'right' : 'center'}
             padding={c.disablePadding ? 'none' : 'normal'}
             sortDirection={(c?.sort && orderBy === c.id) ? order : false}

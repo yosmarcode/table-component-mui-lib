@@ -10,7 +10,6 @@ export interface HeadCell {
 
 export interface ITableComponent  {
     dataSource: any[], // El codigo se necesita pasar siempre un ID, para porder organizar la columna
-    dataSourceExcel?: any[], // Este codigo es necesario para exportar a excel
     columns: HeadCell[] | any,
     isCheckbox?: boolean | undefined,
     isRadioBox?: boolean | undefined,

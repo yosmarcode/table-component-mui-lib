@@ -1,127 +1,127 @@
-import { Box, Checkbox, FormControlLabel, Radio, RadioGroup, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
+import { Checkbox, FormControlLabel, Radio, RadioGroup, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
 import React, { FC } from 'react'
 import { ITableComponent } from './models'
 import { EnhancedTableHead, getComparator, Order } from '../utils/tables'
-import TableExcelComponents from '../TableExcel/TableExcelComponents'
-/*import TablePaginationsComponents from './components/TablePaginations/TablePaginationsComponents'*/
+//import TableExcelComponents from '../TableExcel/TableExcelComponents'
+import TablePaginationsComponents from './components/TablePaginations/TablePaginationsComponents'
 import SearchTable from './components/SearchTable/SearchTable'
 import BtnExcel from '../BtnExcel/BtnExcel'
-import TablePaginations from './components/TablePaginations/TablePaginations'
+//import TablePaginations from './components/TablePaginations/TablePaginations'
 
 
-export const TableComponents: FC<ITableComponent>  = ({
-    dataSource,
-    columns,
-    isCheckbox,
-    isRadioBox,
-    search,
-    isDowmload,
-    selectedData,
-    setSelectedData,
-    isPaginate,
-    _styleColumn,
-    childreButton, 
-    titlePlaceholder}) => {
-    const [order, setOrder] = React.useState<Order>('asc')
-    const [orderBy, setOrderBy] = React.useState<keyof any>('calories')
-    const [selected, setSelected] = React.useState<any>([])
-    const [page, setPage] = React.useState(0)
-    const [rowsPerPage, setRowsPerPage] = React.useState(5)
-    const [searchText, setSearchText] = React.useState<string>('') /// state para buscar en el input text
-    /** --------------------------------------------------------------- */
-    //const columnDataSource = dataSource.length > 0 ? (Object.keys(dataSource[0]) ?? []) : []
-      console.log('columns', columns);
-    const handleRequestSort = (
-      property: keyof any
-    ) => {
-      const isAsc = orderBy === property && order === 'asc'
-      setOrder(isAsc ? 'desc' : 'asc')
-      setOrderBy(property)
-    }
-  
-    const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        const newSelected = dataSource.map((n: any) => n)
-        setSelected(newSelected)
-        setSelectedData(newSelected) // set selected para llevar al compoente invocado
-        return
-      }
-      setSelected([])
-      setSelectedData([]) // set selected para llevar al compoente invocado
-    }
-  
-    const handleClickCheckBox = (row: any) => {
-      const selectedIndex = selected.indexOf(row)
-      let newSelected: any = []
-  
-      if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, row)
-      } else if (selectedIndex === 0) {
-        newSelected = newSelected.concat(selected.slice(1))
-      } else if (selectedIndex === selected.length - 1) {
-        newSelected = newSelected.concat(selected.slice(0, -1))
-      } else if (selectedIndex > 0) {
-        newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1)
-        )
-      }
+export const TableComponents: FC<ITableComponent> = ({
+  dataSource,
+  columns,
+  isCheckbox,
+  isRadioBox,
+  search,
+  isDowmload,
+ // selectedData,
+  setSelectedData,
+  isPaginate,
+  _styleColumn,
+  childreButton,
+  titlePlaceholder
+ }) => {
+  const [order, setOrder] = React.useState<Order>('asc')
+  const [orderBy, setOrderBy] = React.useState<keyof any>('calories')
+  const [selected, setSelected] = React.useState<any>([])
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [searchText, setSearchText] = React.useState<string>('') /// state para buscar en el input text
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof any
+  ) => {
+    event.preventDefault()
+    const isAsc = orderBy === property && order === 'asc'
+    setOrder(isAsc ? 'desc' : 'asc')
+    setOrderBy(property)
+  }
+
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelected = dataSource?.map((n) => n)
       setSelected(newSelected)
-      setSelectedData(newSelected)
+      setSelectedData(newSelected) // set selected para llevar al compoente invocado
+      return
     }
-    const handleClickRadio = (row: any) => {
-      if (row) {
-        setSelected([row])
-        setSelectedData([row])
-      }
+    setSelected([])
+    setSelectedData([]) // set selected para llevar al compoente invocado
+  }
+
+  const handleClickCheckBox = (event: React.ChangeEvent<HTMLInputElement>, row: any) => {
+    event.preventDefault()
+    const selectedIndex = selected.indexOf(row)
+    let newSelected: any = []
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, row)
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1))
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1))
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      )
     }
 
-    const handleChangePage = (newPage: number) => {
-      setPage(newPage)
+    setSelected(newSelected)
+    setSelectedData(newSelected)
+  }
+  const handleClickRadio = (row: any) => {
+    if (row) {
+      setSelected([row])
+      setSelectedData([row])
     }
+  }
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setRowsPerPage(parseInt(event.target.value, 10))
-      setPage(0)
-    }
-    const visibleRows = React.useMemo(
-      () =>
-        [...dataSource]
-          .sort(getComparator(order, orderBy))
-          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-      [dataSource, order, orderBy, page, rowsPerPage]
-    )
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+    event?.preventDefault()
+    setPage(newPage)
+  }
 
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
-    const handleSearch = () => {
-      if (searchText.length > 2) {
-        const dataResult = dataSource.filter((row: Record<string, any>) =>
-          Object.values(row).some(value => value?.toString().toUpperCase().includes(searchText?.toUpperCase())))
+  const visibleRows = React.useMemo(
+    () =>
+      [...dataSource]
+        .sort(getComparator(order, orderBy))
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    [order, orderBy, page, rowsPerPage, dataSource]
+  )
 
-        if (dataResult.length > 0) {
-          visibleRows.length = 0 // limpia los datos antiguos
-          visibleRows.push(...dataResult)
-        } else {
-          visibleRows.push(...dataSource
-            .sort(getComparator(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)) // limpia los datos antiguos}
-        }
+  const handleSearch = () => {
+    if (searchText.length > 2) {
+      const dataResult = dataSource?.filter((row: Record<string, any>) =>
+        Object.values(row).some(value => value?.toString().toUpperCase().includes(searchText?.toUpperCase())))
+
+      if (dataResult.length > 0) {
+        visibleRows.length = 0 // limpia los datos antiguos
+        visibleRows.push(...dataResult)
       } else {
         visibleRows.push(...dataSource
           .sort(getComparator(order, orderBy))
-          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)) // limpia los datos antiguos}
       }
-      return visibleRows
+    } else {
+      visibleRows.push(...dataSource
+        .sort(getComparator(order, orderBy))
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
     }
-    
-
-    console.log('visibleRows', visibleRows)
+    return visibleRows
+  }
 
   return (
- <div>
+    <div>
         <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
           <div>
-            {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
+            {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={ titlePlaceholder ?? 'Buscar...' } />)}
           </div>
           <div>
             {isDowmload && (<BtnExcel tableId='_excel-download' fileName='archivo-descargar' />)}
@@ -156,16 +156,21 @@ export const TableComponents: FC<ITableComponent>  = ({
               childreButton={childreButton}
             />
             <TableBody>
-              {visibleRows.map((row, index: number) => {
-                const isItemSelected: boolean = selected.includes(row)
+              {dataSource && dataSource.length === 0 &&
+                <TableCell sx={{ padding: 1 }} colSpan={columns.length + 1}>
+                  <h4>No se encontraron registros</h4>
+                </TableCell>}
+              {visibleRows && visibleRows?.map((row, index: number) => {
+                const isItemSelected = selected.includes(row)
                 const labelId = `enhanced-table-checkbox-${index}`
+
                 return (
                   <TableRow
                     hover
                     role='checkbox'
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={index + 1}
+                    key={index+15454}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
@@ -179,8 +184,8 @@ export const TableComponents: FC<ITableComponent>  = ({
                               inputProps={{
                                 'aria-labelledby': labelId
                               }}
-                              onClick={() => handleClickCheckBox(row)}
-                            />
+                              onClick={(e: any) => handleClickCheckBox(e,row)}
+                            /> 
                           )}
                           {isRadioBox && (
                             <RadioGroup
@@ -192,8 +197,8 @@ export const TableComponents: FC<ITableComponent>  = ({
                                 value={row}
                                 control={<Radio
                                   color='success'
-                                  checked={JSON.stringify(selectedData) === JSON.stringify(row)}
-                                  onClick={() => handleClickRadio(row)}
+                                  checked={isItemSelected}
+                                  onClick={() => handleClickRadio( row)}
                                          />}
                                 label=''
                               />
@@ -202,10 +207,9 @@ export const TableComponents: FC<ITableComponent>  = ({
                           {childreButton && <div>{childreButton(row)}</div>}
                         </Stack>
                       </TableCell>)}
-
                     {columns.length > 0 && columns.map((columna: any) => (
                       <TableCell key={columna} style={{ textAlign: 'center' }}>
-                         {row[columna] !== undefined && row[columna] !== null ? row[columna?.id] : ''}
+                        {row[columna.id]}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -217,14 +221,7 @@ export const TableComponents: FC<ITableComponent>  = ({
         </TableContainer>
         {isPaginate
           ? (
-            <TablePaginations
-            dataSource={dataSource}
-            rowsPerPage={rowsPerPage}
-            setPage={setPage}
-            page={page}
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage} />
-            /*<TablePaginationsComponents
+            <TablePaginationsComponents
               dataSource={dataSource}
               rowsPerPage={rowsPerPage}
               setPage={setPage}
@@ -232,10 +229,9 @@ export const TableComponents: FC<ITableComponent>  = ({
               setRowsPerPage={setRowsPerPage}
               handleChangePage={handleChangePage}
               handleChangeRowsPerPage={handleChangeRowsPerPage}
-            />*/
-            )
-          : (<Box sx={{ minHeight: '50px', backgroundColor: '#fff', width: '100%', borderRadius: '25px' }} />)}
-      {dataSource && (<TableExcelComponents column={columns} dataSource={dataSource} idTable='_excel-download' isVisible={false} />)}
+            />
+            ) : null}
+      {/*dataSource && (<TableExcelComponents  dataSource={dataSource} idTable='_excel-download' isVisible={false} />)*/}
 
     </div>
   )
