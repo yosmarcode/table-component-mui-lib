@@ -1,6 +1,8 @@
 import { Box, Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material'
 import { visuallyHidden } from '@mui/utils'
 import React from 'react'
+import { HeadCell } from '../../Table/models'
+
 
 
 function descendingComparator<T> (a: T, b: T, orderBy: keyof T) {
@@ -30,7 +32,7 @@ export interface EnhancedTableProps {
     order: Order;
     orderBy: any;
     rowCount: number;
-    column: any,
+    column: HeadCell[] | any,
     isCheckbox?: boolean | undefined,
     isRadioBox?: boolean | undefined,
     _styleColumn?: React.CSSProperties

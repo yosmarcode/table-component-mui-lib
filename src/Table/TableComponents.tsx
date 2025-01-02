@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControlLabel, Paper, Radio, RadioGroup, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
+import { Box, Checkbox, FormControlLabel, Radio, RadioGroup, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
 import React, { FC } from 'react'
 import { ITableComponent } from './models'
 import { EnhancedTableHead, getComparator, Order } from '../utils/tables'
@@ -11,7 +11,6 @@ import TablePaginations from './components/TablePaginations/TablePaginations'
 
 export const TableComponents: FC<ITableComponent>  = ({
     dataSource,
-    dataSourceExcel,
     columns,
     isCheckbox,
     isRadioBox,
@@ -30,8 +29,8 @@ export const TableComponents: FC<ITableComponent>  = ({
     const [rowsPerPage, setRowsPerPage] = React.useState(5)
     const [searchText, setSearchText] = React.useState<string>('') /// state para buscar en el input text
     /** --------------------------------------------------------------- */
-    const columnDataSource = dataSource.length > 0 ? (Object.keys(dataSource[0]) ?? []) : []
-
+    //const columnDataSource = dataSource.length > 0 ? (Object.keys(dataSource[0]) ?? []) : []
+      console.log('columns', columns);
     const handleRequestSort = (
       property: keyof any
     ) => {
@@ -116,10 +115,10 @@ export const TableComponents: FC<ITableComponent>  = ({
     }
     
 
+    console.log('visibleRows', visibleRows)
 
   return (
  <div>
-      <Paper sx={{ width: '100%', pt: 0.5, borderRadius: '15px' }}>
         <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
           <div>
             {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
@@ -160,7 +159,6 @@ export const TableComponents: FC<ITableComponent>  = ({
               {visibleRows.map((row, index: number) => {
                 const isItemSelected: boolean = selected.includes(row)
                 const labelId = `enhanced-table-checkbox-${index}`
-                console.log('isItemSelected', isItemSelected)
                 return (
                   <TableRow
                     hover
@@ -205,9 +203,9 @@ export const TableComponents: FC<ITableComponent>  = ({
                         </Stack>
                       </TableCell>)}
 
-                    {columnDataSource.length > 0 && columnDataSource.map((columna: any) => (
+                    {columns.length > 0 && columns.map((columna: any) => (
                       <TableCell key={columna} style={{ textAlign: 'center' }}>
-                        {row[columna]}
+                         {row[columna] !== undefined && row[columna] !== null ? row[columna?.id] : ''}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -237,9 +235,7 @@ export const TableComponents: FC<ITableComponent>  = ({
             />*/
             )
           : (<Box sx={{ minHeight: '50px', backgroundColor: '#fff', width: '100%', borderRadius: '25px' }} />)}
-
-      </Paper>
-      {dataSourceExcel && (<TableExcelComponents column={columns} dataSource={dataSourceExcel} idTable='_excel-download' isVisible={false} />)}
+      {dataSource && (<TableExcelComponents column={columns} dataSource={dataSource} idTable='_excel-download' isVisible={false} />)}
 
     </div>
   )

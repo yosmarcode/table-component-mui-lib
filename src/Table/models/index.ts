@@ -1,16 +1,17 @@
 export interface HeadCell {
-    disablePadding?: boolean;
-    id?: keyof any;
-    label?: string;
-    numeric?: boolean;
-    sort?: boolean;
-    width?: number;
-  }
+  disablePadding?: boolean;
+  id?: keyof string | object | any;
+  label?: string;
+  numeric?: boolean;
+  sort?: boolean;
+  width?: number;
+  isVisible?: boolean;
+}
 
 export interface ITableComponent  {
     dataSource: any[], // El codigo se necesita pasar siempre un ID, para porder organizar la columna
     dataSourceExcel?: any[], // Este codigo es necesario para exportar a excel
-    columns: HeadCell[],
+    columns: HeadCell[] | any,
     isCheckbox?: boolean | undefined,
     isRadioBox?: boolean | undefined,
     isPaginate?: boolean | undefined,
@@ -22,7 +23,6 @@ export interface ITableComponent  {
     initialSelectionNumber?: number | undefined, // numero inicial de la lista de columna
     _styleColumn?: React.CSSProperties // se le asigna style a la columna
     titlePlaceholder?: string | undefined // title del input de busquedad personalizado
-  
   }
 
   export interface ITextSearch {
