@@ -7,8 +7,8 @@ import { Button } from '@mui/material'
 
 
 interface IProps {
-    tableId: string,
-    fileName: string
+  tableId: string,
+  fileName: string
 }
 
 const BtnExcel: React.FC<IProps> = ({ tableId, fileName }: { tableId: string, fileName: string }) => {
@@ -28,14 +28,7 @@ const BtnExcel: React.FC<IProps> = ({ tableId, fileName }: { tableId: string, fi
         style={{ backgroundColor: '#386641', color: '#fff' }}
         onClick={() => handleDownload()}
       >
-        <div className='d-flex justify-content-between'>
-          <div>
-            <AiOutlineCloudDownload style={{ fontSize: '25px' }} />
-            <span className='my-1 m-2'>Descargar Archivo</span>
-          </div>
-
-        </div>
-
+        <AiOutlineCloudDownload style={{ fontSize: '25px' }} />
       </Button>
     </div>
   )

@@ -1,7 +1,7 @@
 {
   "name": "table-component-mui-lib",
   "private": false,
-  "version": "0.0.47",
+  "version": "0.0.58",
   "type": "module",
   "files": [
     "dist"
