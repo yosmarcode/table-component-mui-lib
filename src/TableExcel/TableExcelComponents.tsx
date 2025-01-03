@@ -1,25 +1,26 @@
 
 import  { memo } from 'react'
+import { getRandomInt } from '../utils'
 // import { getRandomInt } from '../utils'
-const TableExcelComponents = memo(function TableExcelComponents ({ dataSource, idTable, isVisible } : {column?:  any, dataSource?: any[], idTable?: string, isVisible?: boolean}) {
-  const columns = (dataSource && dataSource.length > 0) ? Object.keys(dataSource[0]) : []
+const TableExcelComponents = memo(function TableExcelComponents ({ columns, dataSource, idTable, isVisible } : {columns: any, dataSource?: any[], idTable?: string, isVisible?: boolean}) {
+  //const columns = (dataSource && dataSource.length > 0) ? Object.keys(dataSource[0]) : []
   return (
     <div style={{ display: isVisible ? 'block' : 'none' }}>
       {(dataSource !== undefined && dataSource.length > 0) && (
         <table className='table table-hover table-striped table-borderless' id={idTable}>
           <thead>
             <tr>
-              {columns.map((r: any, indexColumn: number) => (
-                <th scope='col' key={indexColumn + 1} style={{ backgroundColor: '#386641', color: '#fff', textAlign: r.align ?? 'center' }}>{r}</th>
+              {columns.map((r: any) => (
+                <th scope='col' key={getRandomInt()} style={{ backgroundColor: '#386641', color: '#fff', textAlign: r.align ?? 'center' }}>{r.label}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {dataSource.map((fila: any, indexFila:number) => (
-              <tr key={indexFila+12}>
+            {dataSource.map((fila: any) => (
+              <tr key={getRandomInt()}>
                 {columns.map((columna: any) => (
                   <td key={columna} style={{ textAlign: 'center' }}>
-                    {fila[columna.id] !== undefined && fila[columna.id] !== null ? fila[columna.id] : ''}
+                    {(fila[columna.id] !== undefined || fila[columna.id] !== null) ? fila[columna.id] : ''}
                   </td>
                 ))}
               </tr>
