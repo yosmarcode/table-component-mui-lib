@@ -89,10 +89,18 @@ export const TableComponents: FC<ITableComponent> = ({
   }
 
   const visibleRows = React.useMemo(
-    () =>
-      [...dataSource]
+    () =>{
+      if (isPaginate) {
+        [...dataSource]
         .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      } else {
+        [...dataSource]
+        .sort(getComparator(order, orderBy))
+      }
+
+    }
+    ,
     [order, orderBy, page, rowsPerPage, dataSource]
   )
 
