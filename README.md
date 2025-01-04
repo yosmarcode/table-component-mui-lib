@@ -2,6 +2,8 @@
 
 Tabla Componente basada de Material UI. 
 
+Es una idea que salió de muchas dificultades que se presentaron en diferentes implementaciones en diferente software
+
 Esta tabla solo ha sido probada usando. React
 
 
@@ -20,6 +22,9 @@ npm i table-component-mui-lib
 ```
 
 Implementación en tu proyecto
+
+[![](https://markdown-videos-api.jorgenkh.no/youtube/Rb5vrl19yPc)](https://youtu.be/Rb5vrl19yPc)
+
 
 Tipo de Datos Columnas
 
@@ -119,7 +124,6 @@ Tabla Referencia
 | Tipo | Descripcion |
 |----|----|
 | dataSource | Datos visibles en la tabla |
-| dataSourceExcel | Datos Visible para generar Archivo Excel |
 | columns | Columna visible en la tabla |
 | isCheckbox | Se habilita CheckBox para multiple selección en columnas |
 | isRadioBox | Se habilita RadioBox para solo seleccionar un elemento de la columna |
