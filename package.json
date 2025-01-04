@@ -1,7 +1,7 @@
 {
   "name": "table-component-mui-lib",
   "private": false,
-  "version": "0.0.58",
+  "version": "1.0.1",
   "type": "module",
   "files": [
     "dist"
@@ -26,7 +26,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/base": "^5.0.0-beta.68",
     "@mui/material": "^6.3.0",
-     "react": ">=18 || >=19.0.0-rc",
+    "react": ">=18 || >=19.0.0-rc",
     "react-dom": ">=18 || >=19.0.0-rc",
     "react-icons": "^5.4.0"
   },
@@ -52,5 +52,8 @@
     "typescript-eslint": "^8.18.1",
     "vite": "^6.0.3",
     "vite-plugin-dts": "^4.4.0"
+  },
+  "dependencies": {
+    "@mui/icons-material": "^6.3.1"
   }
 }
