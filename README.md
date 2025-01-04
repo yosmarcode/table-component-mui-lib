@@ -26,6 +26,8 @@ Implementación en tu proyecto
 [![](https://markdown-videos-api.jorgenkh.no/youtube/Rb5vrl19yPc)](https://youtu.be/Rb5vrl19yPc)
 
 
+* [Demo](https://demo-table-component.vercel.app/)
+
 Tipo de Datos Columnas
 
 ```js

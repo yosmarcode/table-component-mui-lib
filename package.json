@@ -1,8 +1,20 @@
 {
   "name": "table-component-mui-lib",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
+  "description": "Tabla Componente basada de Material UI.",
+  "author": "Yosmar Hinestroza",
+  "license": "MIT",
+  "homepage": "https://demo-table-component.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yosmarcode/table-component-mui-lib"
+  },
+  "bugs": {
+    "url": "https://github.com/yosmarcode/table-component-mui-lib/issues",
+    "email": "yosmarcode@gmail"
+  },
   "files": [
     "dist"
   ],
