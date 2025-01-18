@@ -133,15 +133,17 @@ const handlResetSearch = () => {
 
   return (
     <div>
-      <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', gap: '5px' }}>
-          {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
-          {(search && isResetData) && (<Button variant='contained' color='primary' onClick={handlResetSearch}><AiOutlineFilter style={{ fontSize: '25px', padding: '0.rem' }} /></Button>)}
-        </div>
-        <div>
-          {isDowmload && (<BtnExcel tableId='_excel-download' fileName='archivo-descargar' />)}
-        </div>
-      </Stack>
+            <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', gap: '5px' }}>
+              {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
+              {(search && isResetData) && (<Button variant='contained' color='primary' onClick={handlResetSearch}><AiOutlineFilter style={{ fontSize: '25px', padding: '0.rem' }} /></Button>)}
+            </div>
+            <div>
+              {isDowmload && (<BtnExcel tableId='_excel-download' fileName='archivo-descargar' />)}
+            </div>
+          </Stack>
+
+    
       <TableContainer sx={{
         my: 2,
         maxHeight: 350
@@ -151,7 +153,6 @@ const handlResetSearch = () => {
         <Table
           sx={{
             minWidth: 750,
-            borderRadius: '25px',
             '& th, & td': { border: '1px solid #d6d6d6d6' }
           }}
           aria-labelledby='tableTitle'
@@ -173,7 +174,7 @@ const handlResetSearch = () => {
           <TableBody>
             {dataSource && dataSource.length === 0 &&
               <TableCell sx={{ padding: 1 }} colSpan={columns.length + 1}>
-                <h4>No se encontraron registros</h4>
+                <h6>No se encontraron registros</h6>
               </TableCell>}
             {visibleRows && visibleRows?.map((row: any, index: number) => {
               const isItemSelected = selected.includes(row)

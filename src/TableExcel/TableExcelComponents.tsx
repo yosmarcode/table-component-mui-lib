@@ -16,10 +16,10 @@ const TableExcelComponents = memo(function TableExcelComponents ({ columns, data
             </tr>
           </thead>
           <tbody>
-            {dataSource.map((fila: any) => (
-              <tr key={getRandomInt()}>
-                {columns.map((columna: any) => (
-                  <td key={columna} style={{ textAlign: 'center' }}>
+            {dataSource.map((fila: any, index) => (
+              <tr key={index + 1}>
+                {columns.map((columna: any, i: number) => (
+                  <td key={i + 12} style={{ textAlign: 'center' }}>
                     {(fila[columna.id] !== undefined || fila[columna.id] !== null) ? fila[columna.id] : ''}
                   </td>
                 ))}
