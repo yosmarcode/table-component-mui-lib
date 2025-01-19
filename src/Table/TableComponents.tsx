@@ -22,13 +22,14 @@ export const TableComponents: FC<ITableComponent> = ({
   isPaginate,
   _styleColumn,
   childreButton,
-  titlePlaceholder
+  titlePlaceholder,
+  limitPagination
 }) => {
   const [order, setOrder] = React.useState<Order>('asc')
   const [orderBy, setOrderBy] = React.useState<keyof any>('calories')
   const [selected, setSelected] = React.useState<any>([])
   const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [rowsPerPage, setRowsPerPage] = React.useState(isPaginate ? (limitPagination ?? 5) : dataSource.length)
   const [searchText, setSearchText] = React.useState<string>('') /// state para buscar en el input text
   const [isResetData, setIsResetData] = React.useState<boolean>(false);
 
@@ -88,17 +89,23 @@ export const TableComponents: FC<ITableComponent> = ({
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
+    setRowsPerPage(parseInt(event.target.value, (limitPagination ?? 5)))
     setPage(0)
   }
 
   let visibleRows = React.useMemo(
     () => {
-      return [...dataSource]
-          .sort(getComparator(order, orderBy))
-          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      console.log('isPaginate ===>', isPaginate)
+      if (isPaginate === false || isPaginate === undefined || isPaginate === null) {
+        return [...dataSource]
+        .sort(getComparator(order, orderBy))
+      } else {
+        return [...dataSource]
+        .sort(getComparator(order, orderBy))
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      }
 
-    }, [dataSource, order, orderBy, page, rowsPerPage]
+    }, [dataSource, isPaginate, order, orderBy, page, rowsPerPage]
   )
 
   const handleSearch = () => {
@@ -132,18 +139,18 @@ const handlResetSearch = () => {
 }
 
   return (
-    <div>
-            <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', gap: '5px' }}>
-              {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
-              {(search && isResetData) && (<Button variant='contained' color='primary' onClick={handlResetSearch}><AiOutlineFilter style={{ fontSize: '25px', padding: '0.rem' }} /></Button>)}
-            </div>
-            <div>
-              {isDowmload && (<BtnExcel tableId='_excel-download' fileName='archivo-descargar' />)}
-            </div>
-          </Stack>
-
-    
+    <div> 
+      {(search === false || search === undefined || search === null) ? (
+        null
+      ) : (      <Stack sx={{ flexDirection: 'row', justifyContent: 'space-between', margin: '30px', paddingTop: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', gap: '5px' }}>
+          {search && (<SearchTable handleSearch={handleSearch} setSearchText={setSearchText} searchText={searchText} placeholder={titlePlaceholder ?? 'Buscar...'} />)}
+          {(search && isResetData) && (<Button variant='contained' color='primary' onClick={handlResetSearch}><AiOutlineFilter style={{ fontSize: '25px', padding: '0.rem' }} /></Button>)}
+        </div>
+        <div>
+          {isDowmload && (<BtnExcel tableId='_excel-download' fileName='archivo-descargar' />)}
+        </div>
+      </Stack>) }
       <TableContainer sx={{
         my: 2,
         maxHeight: 350

@@ -22,6 +22,7 @@ export interface ITableComponent  {
     initialSelectionNumber?: number | undefined, // numero inicial de la lista de columna
     _styleColumn?: React.CSSProperties // se le asigna style a la columna
     titlePlaceholder?: string | undefined // title del input de busquedad personalizado
+    limitPagination?: number | undefined // limite de paginacion por pagina
   }
 
   export interface ITextSearch {
